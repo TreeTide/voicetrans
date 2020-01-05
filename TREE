@@ -1,7 +1,0 @@
-- pocketsphinx
-  - to get /dev/dsp with also, do 'modprobe snd_pcm_oss' which adds emulation device
-  - building
-    - nix-shell -p haskellPackages.c2hs pocketsphinx ghc
-       - c2hs --cppopts="-I/nix/store/ak50m6pmph0wrl68xjr2vvd9nxb7zvp7-pocketsphinx-5prealpha/include/pocketsphinx" --cppopts="-I/nix/store/mny27hzd1qgqz0m90rq50bwzvzz9a491-sphinxbase-5prealpha/include/sphinxbase" src/Sphinx.chs
-         - TODO: should figure how to invoke c2hs as part of the cabal tool, instead of doing a manual step
-       - cabal new-build --extra-include-dirs="/nix/store/ak50m6pmph0wrl68xjr2vvd9nxb7zvp7-pocketsphinx-5prealpha/include/pocketsphinx /nix/store/mny27hzd1qgqz0m90rq50bwzvzz9a491-sphinxbase-5prealpha/include/sphinxbase"

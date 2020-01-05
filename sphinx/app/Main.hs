@@ -1,6 +1,5 @@
 module Main where
 
-import Lib
 import Sphinx
 import Control.Monad (forM_)
 import qualified Data.ByteString as BS
@@ -10,12 +9,15 @@ import Foreign.Ptr (castPtr, nullPtr)
 
 main :: IO ()
 main = do
+  -- NOTE: from https://github.com/cmusphinx/pocketsphinx/tree/master/test/data
   raw <- BS.readFile "/tmp/goforward.raw"
   decode raw
 
 decode bs = do
   args <- defaultAcceptedArgs
-  let mdir = "/home/ron/dev/3rd/pocketsphinx/model/en-us"
+  -- NOTE: download en-us model from https://github.com/cmusphinx/pocketsphinx/tree/master/model/en-us
+  let mdir = "/tmp/pocketsphinx/model/en-us"
+  -- TODO(robinp): bracket etc
   cfg <- initConfig3 (Config nullPtr) args True
            "-hmm" (mdir ++ "/en-us")
            "-lm" (mdir ++ "/en-us.lm.bin")
