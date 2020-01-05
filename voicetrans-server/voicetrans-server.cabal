@@ -1,0 +1,77 @@
+name:                voicetrans-server
+version:             0.1.0.0
+synopsis:            Server for integrating components.
+description:         Please see README.md
+license:             Apache2
+license-file:        LICENSE
+author:              Robin Palotai
+maintainer:          robinp@treetide.com
+copyright:           2020 Robin Palotai
+category:            Web
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+-- TODO(robinp): split into multiple libs, give sane names.
+library
+  hs-source-dirs:      src
+  exposed-modules:     Lib
+                     , Prometheus.Extra
+                     , Refresh
+                     , Translate
+                     , Wave
+  build-depends:       async
+                     , base >= 4.7 && < 5
+                     , binary
+                     , bytestring
+                     , conduit
+                     , conduit-combinators
+                     , conduit-audio
+                     , conduit-audio-samplerate
+                     , data-binary-ieee754
+                     , hflags
+                     , http-client
+                     , lifted-base
+                     , lens
+                     , lens-aeson
+                     , monad-control
+                     , prometheus-client
+                     , resourcet
+                     , safe
+                     , stm
+                     , stm-chans
+                     , stm-conduit
+                     , text
+                     , thyme
+                     , transformers
+                     , transformers-base
+                     , vector
+                     , vector-binary-instances
+                     , vector-space
+                     , wreq
+  default-language:    Haskell2010
+
+executable voicetrans-server-exe
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , voicetrans-server
+                     , bytestring
+                     , hflags
+                     , scotty
+                     , stm
+                     , stm-containers
+                     , text
+                     , transformers
+                     , wai-middleware-prometheus
+  default-language:    Haskell2010
+
+test-suite voicetrans-server-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , voicetrans-server
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
